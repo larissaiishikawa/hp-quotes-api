@@ -23,11 +23,11 @@ A **Harry Potter Quotes API** permite aos usuários acessar frases sobre a franq
 
 1. Clone o repositório:
 
-```git clone https://github.com/larissaiishikawa/harrypotter-api.git ```
+```git clone https://github.com/larissaiishikawa/hp-quotes-api.git ```
 
 2. Entre na pasta do projeto
 
-```cd harrypotter-api ```
+```cd hp-quotes-api ```
 
 3. Instale as dependências do projeto
 
