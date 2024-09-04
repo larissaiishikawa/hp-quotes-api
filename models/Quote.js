@@ -1,4 +1,3 @@
-// In models/Quote.js
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
