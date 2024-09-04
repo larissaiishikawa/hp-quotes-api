@@ -91,18 +91,8 @@ const createAdmin = async (req, res) => {
 };
 
 // Função para logout
-const logoutUser = async (req, res) => {
-    const { token } = req.body; 
-
-    try {
-        const user = await User.findOneAndUpdate({ token }, { $unset: { token: "" } }, { new: true });
-        if (!user) {
-            return res.status(404).json({ msg: 'Usuário não encontrado' });
-        }
-        res.status(200).json({ msg: 'Desconectado com sucesso' });
-    } catch (error) {
-        res.status(500).json({ msg: 'Erro no servidor' });
-    }
+const logoutUser = (req, res) => {
+    res.status(200).json({ msg: 'Desconectado com sucesso' });
 };
 
 // Exportar funções
