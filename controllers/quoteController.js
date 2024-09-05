@@ -72,10 +72,25 @@ const deleteQuote = async (req, res) => {
     }
 };
 
+// Função para contar o número de letras na citação
+const countLettersInQuote = async (req, res) => {
+    try {
+        const quote = await Quote.findById(req.params.id);
+        if (!quote) {
+            return res.status(404).json({ msg: 'Citação não encontrada' });
+        }
+        const letterCount = quote.text.replace(/\s+/g, '').length;
+        res.status(200).json({ letterCount });
+    } catch (error) {
+        res.status(500).json({ msg: error.message });
+    }
+};
+
 module.exports = {
     getAllQuotes,
     getQuoteById,
     createQuote,
     updateQuote,
-    deleteQuote
+    deleteQuote,
+    countLettersInQuote
 };

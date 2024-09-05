@@ -5,7 +5,8 @@ const {
   getQuoteById,
   createQuote,
   updateQuote,
-  deleteQuote
+  deleteQuote,
+  countLettersInQuote // Adicione a função aqui
 } = require('../controllers/quoteController');
 const { checkToken } = require('../middleware/auth'); 
 
@@ -175,5 +176,35 @@ router.put('/:id', checkToken, updateQuote);
  *         description: Erro interno do servidor
  */
 router.delete('/:id', checkToken, deleteQuote);
+
+/**
+ * @swagger
+ * /api/quotes/{id}/letters:
+ *   get:
+ *     tags: [Quotes]
+ *     summary: Conta o número de letras em uma citação.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Contagem de letras da citação
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 letterCount:
+ *                   type: integer
+ *                   example: 55
+ *       404:
+ *         description: Citação não encontrada
+ *       500:
+ *         description: Erro interno do servidor
+ */
+router.get('/:id/letters', checkToken, countLettersInQuote);
 
 module.exports = router;

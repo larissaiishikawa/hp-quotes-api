@@ -8,16 +8,15 @@ const swaggerOptions = {
         info: {
             title: 'Harry Potter API',
             version: '1.0.0',
-            description: 'Documentação da API para o projeto Harry Potter.',
+            description: 'Documentação da API para o projeto Harry Potter Quotes.',
         },
         servers: [
             {
-                url: 'http://localhost:5001/api',
-                description: 'Servidor de Desenvolvimento',
+                url: 'http://localhost:5001/api'
             },
         ],
     },
-    apis: [path.join(__dirname, '../routes/*.js')], // Caminho para seus arquivos de rota
+    apis: [path.join(__dirname, '../routes/*.js')],
 };
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
