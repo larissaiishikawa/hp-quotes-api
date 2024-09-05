@@ -2,14 +2,13 @@
 
 ## Descrição
 
-A **Harry Potter Quotes API** permite aos usuários acessar frases sobre a franquia de filmes baseada nos livros de J.K. Rowling. Ela pode fornecer dados como frase, autor e filme. Ideal para desenvolvedores que desejam integrar conteúdo temático de Harry Potter em seus aplicativos ou sites.
+A **Harry Potter Quotes API** permite aos usuários acessar frases e personagens sobre a franquia de filmes baseada nos livros de J.K. Rowling. Ela pode fornecer dados como frase, autor e filme, além de casa e data e nascimento de seu correspondente personagem. Ideal para desenvolvedores que desejam integrar conteúdo temático de Harry Potter em seus aplicativos ou sites.
 
 ## Funcionalidades
 
 - **Gerenciamento de Frases:** Criação, edição, exclusão e visualização de frases criados pelo administrador. E apenas visualização para visitantes da API.
-- **Visualização de Personagens:** Criação, edição, exclusão e visualização de personagens criados pelo administrador. E apenas visualização para visitantes da API.
-- **Autenticação de Usuários:** Registro e login do administrador.
-- **Painel de Administração:** Interface administrativa para gerenciar conteúdo, realizar logout e ir para página principal.
+- **Gerenciamento de Personagens:** Criação, edição, exclusão e visualização de personagens criados pelo administrador. E apenas visualização para visitantes da API.
+- **Autenticação de Usuários:** Registro, login e logout do administradores e de usuários.
 
 ## Tecnologias Utilizadas
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
