@@ -99,7 +99,6 @@ const logoutUser = (req, res) => {
 };
 
 // Função para mostrar a quantidade de acessos
-
 const getAccess = async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
@@ -114,7 +113,10 @@ const getAccess = async (req, res) => {
     }
 };
 
-
-
-// Exportar funções
-module.exports = { registerUser, loginUser, createAdmin, logoutUser, getAccess };
+module.exports = {
+    registerUser,
+    loginUser,
+    createAdmin,
+    logoutUser,
+    getAccess
+};
