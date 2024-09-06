@@ -13,6 +13,7 @@ app.use(express.json());
 const authRoutes = require('./routes/authRoutes');
 const characterRoutes = require('./routes/characterRoutes');
 const quotesRoutes = require('./routes/quotesRoutes');
+const installRoutes = require('./routes/installRoutes');
 
 // Conecte-se ao MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -29,6 +30,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.use('/api/auth', authRoutes);
 app.use('/api/characters', characterRoutes);
 app.use('/api/quotes', quotesRoutes);
+app.use('/api/install', installRoutes);
 
 // Rota para documentação Swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

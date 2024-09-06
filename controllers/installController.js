@@ -1,21 +1,8 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const Character = require('./models/Character');
-const Quote = require('./models/Quote');
-const User = require('./models/User');
+const Character = require('../models/Character');
+const Quote = require('../models/Quote');
+const User = require('../models/User');
 const bcrypt = require('bcrypt');
-
-dotenv.config();
-
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log('Conectado ao MongoDB'))
-.catch((err) => {
-    console.error('Erro ao conectar ao MongoDB:', err);
-    process.exit(1);
-});
 
 const characters = [
     { name: 'Harry Potter', house: 'Gryffindor', dob: '1980-07-31' },
@@ -41,29 +28,32 @@ const users = [
     { name: 'Admin Two', email: 'admin.two@example.com', password: 'adminpassword', isAdmin: true }
 ];
 
-const insertData = async () => {
+const installDatabase = async (req, res) => {
     try {
+        // Apaga os dados existentes
         await Character.deleteMany({});
         await Quote.deleteMany({});
         await User.deleteMany({});
 
+        // Cria usuários com senhas criptografadas
         const hashedUsers = await Promise.all(users.map(async (user) => {
             const salt = await bcrypt.genSalt(12);
             const passwordHash = await bcrypt.hash(user.password, salt);
             return { ...user, password: passwordHash };
         }));
 
+        // Insere os dados no banco de dados
         await Character.insertMany(characters);
         await Quote.insertMany(quotes);
         await User.insertMany(hashedUsers);
 
-        console.log('Dados inseridos com sucesso!');
-        mongoose.connection.close();
+        res.status(200).json({ msg: 'Banco de dados instalado e populado com sucesso!' });
     } catch (error) {
-        console.error('Erro ao inserir dados:', error);
-        mongoose.connection.close();
-        process.exit(1);
+        console.error('Erro ao instalar o banco de dados:', error);
+        res.status(500).json({ msg: 'Erro ao instalar o banco de dados' });
     }
 };
 
-insertData();
+module.exports = {
+    installDatabase
+};

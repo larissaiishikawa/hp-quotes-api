@@ -6,7 +6,7 @@ const {
   createQuote,
   updateQuote,
   deleteQuote,
-  countLettersInQuote // Adicione a função aqui
+  countLettersInQuote
 } = require('../controllers/quoteController');
 const { checkToken } = require('../middleware/auth'); 
 
