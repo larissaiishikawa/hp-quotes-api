@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerUser, loginUser, createAdmin, logoutUser } = require('../controllers/authController');
+const { registerUser, loginUser, createAdmin, logoutUser, getAccess } = require('../controllers/authController');
 const { checkToken } = require('../middleware/auth');
 
 /**
@@ -133,5 +133,31 @@ router.post('/admin/register', checkToken, createAdmin);
  *         description: Acesso negado
  */
 router.post('/logout', checkToken, logoutUser);
+
+/**
+ * @swagger
+ * /api/auth/access:
+ *   get:
+ *     tags: [Auth]
+ *     summary: Obtém a quantidade de acessos do usuário logado.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Retorna a quantidade de acessos do usuário.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 accessCount:
+ *                   type: integer
+ *                   example: 5
+ *       401:
+ *         description: Token inválido ou não fornecido.
+ *       500:
+ *         description: Erro no servidor.
+ */
+router.get('/access', checkToken, getAccess);
 
 module.exports = router;

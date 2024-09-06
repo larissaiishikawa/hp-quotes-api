@@ -47,6 +47,9 @@ const loginUser = async (req, res) => {
             return res.status(422).json({ msg: 'Credenciais inválidas' });
         }
 
+        user.access += 1;
+        await user.save();
+
         const secret = process.env.SECRET;
         const token = jwt.sign({ id: user._id }, secret);
         res.status(200).json({ msg: 'Autenticado com sucesso', token });
@@ -95,5 +98,23 @@ const logoutUser = (req, res) => {
     res.status(200).json({ msg: 'Desconectado com sucesso' });
 };
 
+// Função para mostrar a quantidade de acessos
+
+const getAccess = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ msg: 'Usuário não encontrado' });
+        }
+
+        res.status(200).json({ accessCount: user.access });
+    } catch (error) {
+        res.status(500).json({ msg: 'Erro no servidor' });
+    }
+};
+
+
+
 // Exportar funções
-module.exports = { registerUser, loginUser, createAdmin, logoutUser };
+module.exports = { registerUser, loginUser, createAdmin, logoutUser, getAccess };
